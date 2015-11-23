@@ -1,4 +1,6 @@
 # Zara
+- Lưu ý : sử dụng project lombok nên tốt nhất nên sử dụng Intellji idea và cài plugin lombok để được hỗ trợ, hoặc có thể sử dụng elipse nhưng phải cài pluggin lombok
+- https://projectlombok.org/
 # Yêu cầu 
 1. Mongodb
 2. Mysql (tạm thời, đang nghiên cứu để bỏ hẳn mysql)
