@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vn.zara.domain.Util.SecurityUtil;
+import vn.zara.domain.util.SecurityUtil;
 import vn.zara.domain.user.User;
 import vn.zara.domain.user.UserService;
 import vn.zara.infras.security.xauth.Token;

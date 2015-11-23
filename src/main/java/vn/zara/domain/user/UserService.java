@@ -4,14 +4,10 @@ package vn.zara.domain.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.DigestUtils;
-import vn.zara.domain.Util.SecurityUtil;
-import vn.zara.domain.common.exception.UserNotExisted;
+import vn.zara.domain.util.SecurityUtil;
 
 @Service
 @Transactional(readOnly = true)

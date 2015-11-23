@@ -1,5 +1,5 @@
 // Copyright (c) 2015 KMS Technology, Inc.
-package vn.zara.domain.Util;
+package vn.zara.domain.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
