@@ -4,10 +4,8 @@ package vn.zara.web.dto;
 
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import vn.zara.domain.common.validation.FieldMatch;
-import vn.zara.domain.user.User;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;

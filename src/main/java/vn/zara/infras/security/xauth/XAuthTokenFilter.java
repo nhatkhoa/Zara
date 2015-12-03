@@ -37,9 +37,9 @@ public class XAuthTokenFilter extends GenericFilterBean {
 
                 if (tokenProvider.validateToken(authToken, details)) {
                     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                        details,
-                        details.getPassword(),
-                        details.getAuthorities());
+                            details,
+                            details.getPassword(),
+                            details.getAuthorities());
 
                     SecurityContextHolder.getContext().setAuthentication(token);
                 }

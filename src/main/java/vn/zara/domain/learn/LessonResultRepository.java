@@ -7,9 +7,9 @@ package vn.zara.domain.learn;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.stream.Stream;
+import java.util.Optional;
 
-public interface DoExerciseRepository extends MongoRepository<DoExercise, String> {
-    Stream<DoExercise> findByUsername(String username);
+public interface LessonResultRepository extends MongoRepository<LessonResult, String> {
+    Optional<LessonResult> findOneByLessonIdAndUsername(String lessonId, String username);
 
 }

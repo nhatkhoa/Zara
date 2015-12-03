@@ -7,17 +7,16 @@ package vn.zara.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import vn.zara.domain.common.AbstractCollection;
 
 
 @Document(collection = "users")
 @Data
-public class User{
+public class User extends AbstractCollection {
     protected static Logger Logger = LoggerFactory.getLogger(User.class);
 
     public enum Role {
@@ -30,7 +29,7 @@ public class User{
         }
     }
 
-    @Id
+    @Indexed
     private String username;
 
     @JsonIgnore

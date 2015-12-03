@@ -7,5 +7,5 @@ package vn.zara.domain.lesson;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface QuestionRepository extends MongoRepository<Question, String>{
+public interface QuestionRepository extends MongoRepository<Question, String> {
 }

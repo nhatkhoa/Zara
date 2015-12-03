@@ -1,7 +1,6 @@
 // Copyright (c) 2015 KMS Technology, Inc.
 package vn.zara.infras.security;
 
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

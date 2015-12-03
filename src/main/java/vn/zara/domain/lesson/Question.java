@@ -8,15 +8,15 @@ package vn.zara.domain.lesson;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import vn.zara.domain.common.AbstractCollection;
 
 @Data
 @Document(collection = "questions")
-public class Question {
+public class Question extends AbstractCollection {
     protected static Logger Logger = LoggerFactory.getLogger(Question.class);
 
-    public enum LEVEL{
+    public enum LEVEL {
         BASIC(10),
         NORMAL(20),
         MEDIUM(30),
@@ -24,16 +24,21 @@ public class Question {
         ADVANCED(50);
 
         private int score;
-        LEVEL(int score){
+
+        LEVEL(int score) {
             this.score = score;
         }
-        public String getLevel(){return name();}
-        public int getScore(){return this.score;}
+
+        public String getLevel() {
+            return name();
+        }
+
+        public int getScore() {
+            return this.score;
+        }
 
     }
 
-    @Id
-    private String id;
     private String question;
     private String[] options;
     private Object[] answers;

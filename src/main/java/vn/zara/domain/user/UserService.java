@@ -11,7 +11,7 @@ import vn.zara.domain.util.SecurityUtil;
 
 @Service
 @Transactional(readOnly = true)
-public class UserService{
+public class UserService {
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;

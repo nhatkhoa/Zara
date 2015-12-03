@@ -6,9 +6,6 @@
 package vn.zara.domain.lesson;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import vn.zara.domain.user.User;
 
-import java.util.Optional;
-
-public interface ExerciseRepository extends MongoRepository<Exercise, String>{
+public interface ExerciseRepository extends MongoRepository<Exercise, String> {
 }

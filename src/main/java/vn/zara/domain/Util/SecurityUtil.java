@@ -12,7 +12,7 @@ public class SecurityUtil {
         Authentication authentication = securityContext.getAuthentication();
 
         String username = null;
-        if(authentication != null) {
+        if (authentication != null) {
             if (authentication.getPrincipal() instanceof UserDetails) {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 username = userDetails.getUsername();

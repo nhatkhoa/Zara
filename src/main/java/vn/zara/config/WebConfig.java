@@ -15,7 +15,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     private CommonConfig commonConfig;
 
     @Bean
-    public Validator getValidator(){
+    public Validator getValidator() {
         return commonConfig.validator();
     }
 }

@@ -12,6 +12,8 @@ local.properties
 .settings/
 .loadpath
 
+.mvn/
+
 # Eclipse Core
 .project
 
@@ -26,6 +28,7 @@ local.properties
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
 
 # Java annotation processor (APT)
 .factorypath

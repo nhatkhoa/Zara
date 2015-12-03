@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vn.zara.domain.util.SecurityUtil;
 import vn.zara.domain.user.User;
 import vn.zara.domain.user.UserService;
+import vn.zara.domain.util.SecurityUtil;
 import vn.zara.infras.security.xauth.Token;
 import vn.zara.infras.security.xauth.TokenProvider;
 import vn.zara.web.dto.RegisterUserInfo;
@@ -41,8 +41,8 @@ public class AccountRest {
 
     @Autowired
     public AccountRest(UserService userService, TokenProvider tokenProvider,
-            AuthenticationManager authenticationManager,
-            UserDetailsService userDetailsService) {
+                       AuthenticationManager authenticationManager,
+                       UserDetailsService userDetailsService) {
         this.userService = userService;
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
@@ -83,4 +83,4 @@ public class AccountRest {
         return userService.getUserInfo();
     }
 
-  }
+}

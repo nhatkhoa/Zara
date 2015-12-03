@@ -7,7 +7,6 @@ import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
@@ -43,16 +42,16 @@ public class SwaggerConfig implements EnvironmentAware {
         watch.start();
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo())
-            .genericModelSubstitutes(ResponseEntity.class)
-            .forCodeGeneration(true)
-            .genericModelSubstitutes(ResponseEntity.class)
-            .directModelSubstitute(LocalDate.class, String.class)
-            .directModelSubstitute(ZonedDateTime.class, Date.class)
-            .directModelSubstitute(LocalDateTime.class, Date.class)
-            .select()
-            .paths(regex("/api/.*"))
-            .build();
+                .apiInfo(apiInfo())
+                .genericModelSubstitutes(ResponseEntity.class)
+                .forCodeGeneration(true)
+                .genericModelSubstitutes(ResponseEntity.class)
+                .directModelSubstitute(LocalDate.class, String.class)
+                .directModelSubstitute(ZonedDateTime.class, Date.class)
+                .directModelSubstitute(LocalDateTime.class, Date.class)
+                .select()
+                .paths(regex("/api/.*"))
+                .build();
 
         watch.stop();
         logger.debug("Started Swagger in {} ms", watch.getTotalTimeMillis());
@@ -62,13 +61,13 @@ public class SwaggerConfig implements EnvironmentAware {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-            propertyResolver.getProperty("title"),
-            propertyResolver.getProperty("description"),
-            propertyResolver.getProperty("version"),
-            propertyResolver.getProperty("termsOfServiceUrl"),
-            propertyResolver.getProperty("contact"),
-            propertyResolver.getProperty("license"),
-            propertyResolver.getProperty("licenseUrl"));
+                propertyResolver.getProperty("title"),
+                propertyResolver.getProperty("description"),
+                propertyResolver.getProperty("version"),
+                propertyResolver.getProperty("termsOfServiceUrl"),
+                propertyResolver.getProperty("contact"),
+                propertyResolver.getProperty("license"),
+                propertyResolver.getProperty("licenseUrl"));
     }
 
 }

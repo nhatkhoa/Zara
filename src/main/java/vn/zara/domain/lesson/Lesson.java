@@ -5,24 +5,21 @@
 
 package vn.zara.domain.lesson;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import vn.zara.domain.common.AbstractCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Document(collection = "lessons")
-public class Lesson {
+public class Lesson extends AbstractCollection {
     protected static Logger Logger = LoggerFactory.getLogger(Lesson.class);
 
-    @Id
-    private String id;
     private String name;
     private String description;
     private String theory;
