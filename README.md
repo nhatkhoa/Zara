@@ -1,6 +1,8 @@
 # Zara
 - Lưu ý : sử dụng project lombok nên tốt nhất nên sử dụng Intellji idea và cài plugin lombok để được hỗ trợ, hoặc có thể sử dụng elipse nhưng phải cài pluggin lombok
 - https://projectlombok.org/
+- 
+## Nên tạo một branch riêng để làm việc trên đó.. không push code trực tiếp lên master.
 
 # Yêu cầu 
 1. Mongodb
