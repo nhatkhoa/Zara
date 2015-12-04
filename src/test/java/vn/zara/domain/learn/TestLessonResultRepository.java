@@ -17,8 +17,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import vn.zara.ZaraApiApplication;
+import vn.zara.domain.pokemon.PokemonGroup;
+import vn.zara.domain.pokemon.PokemonService;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +34,11 @@ public class TestLessonResultRepository {
     @Autowired
     private LessonResultRepository lessonResults;
 
+    @Autowired
+    private PokemonService pokemonService;
+
+    @Autowired
+    private DoExerciseService doExerciseService;
 
     @Test
     public void testFindAll() throws IOException {

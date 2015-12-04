@@ -7,10 +7,7 @@ package vn.zara.domain.lesson;
 
 import lombok.val;
 import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,45 +33,10 @@ public class TestExerciseRepository {
     @Autowired
     private QuestionRepository questions;
 
-    private Lesson createLesson(String title) {
-        val lesson = new Lesson();
-        lesson.setName(String.format("Bài học %s", title));
-        lesson.setDescription("Có khùng mới học bài này :v");
-        lesson.setTheory("Bảng nhân 3 thì lấy bảng cửu chương ra mà xem, vào đây làm gì?");
-        return lesson;
-    }
-
-    private Exercise createExercise(String title) {
-        val exercise = new Exercise();
-        exercise.setTitle(title);
-        exercise.setDescription("Bài tập này chán lắm vào làm gì?");
-        return exercise;
-    }
-
-    private List<Exercise> addExerciseToLesson() {
-        val list = new ArrayList<Exercise>();
-        for (int i = 0; i < 10; i++) {
-            val exercise = createExercise(String.format("Bài tập dành cho gà con cấp %s", i));
-            list.add(exercise);
-        }
-        return list;
-    }
-
-    private Exercise addQuestionToExercise(Exercise exercise) {
-        for (int i = 0; i < 10; i++) {
-            val question = new Question();
-            question.setQuestion("Bạn có biết bảng nhân 3 là gì không?");
-            question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
-            question.setAnswers(new Integer[]{0});
-            exercise.getQuestions().add(question);
-        }
-        return exercise;
-    }
-
     @Test
     public void testFindAll() {
         for (int i = 0; i < 3; i++) {
-            val lesson = createLesson(String.format("Làm bảng nhân " + (i + 2)));
+            val lesson = Utils.createLesson(String.format("Làm bảng nhân " + (i + 2)));
             lessons.save(lesson);
         }
         Assert.assertThat(lessons.findAll().size(), CoreMatchers.is(3));
@@ -82,7 +44,7 @@ public class TestExerciseRepository {
 
     @Test
     public void testFindOneById() {
-        val lesson = createLesson("Bài Học Test");
+        val lesson = Utils.createLesson("Bài Học Test");
         lessons.save(lesson);
 
         val lessonResult = lessons.findOne(lesson.getId());
@@ -92,12 +54,12 @@ public class TestExerciseRepository {
 
     @Test
     public void testAddExerciseToLesson() {
-        // --- create instance of Lesson
-        val lesson = createLesson("Bài Học Test");
+        // --- create instance of LessonForListing
+        val lesson = Utils.createLesson("Bài Học Test");
         lessons.save(lesson);
 
         // --- create random 10 exercises
-        val exerciseRandom = addExerciseToLesson();
+        val exerciseRandom = Utils.addExerciseToLesson();
         exercises.save(exerciseRandom);
 
         // --- add 10 random exercises to lesson
@@ -112,8 +74,7 @@ public class TestExerciseRepository {
     }
 
 
-    @Ignore
-    @After
+    @Before
     public void cleanDatabase() {
         lessons.deleteAll();
     }

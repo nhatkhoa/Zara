@@ -42,4 +42,5 @@ public class Question extends AbstractCollection {
     private String question;
     private String[] options;
     private Object[] answers;
+    private LEVEL level;
 }

@@ -38,14 +38,16 @@ public class Utils {
         return list;
     }
 
-    public static Exercise addQuestionToExercise(Exercise exercise) {
+    public static List<Question> createRandomQuestions() {
+        List<Question> quests = new ArrayList();
+
         for (int i = 0; i < 10; i++) {
             val question = new Question();
             question.setQuestion("Bạn có biết bảng nhân 3 là gì không?");
             question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
             question.setAnswers(new Integer[]{0});
-            exercise.getQuestions().add(question);
+            quests.add(question);
         }
-        return exercise;
+        return quests;
     }
 }

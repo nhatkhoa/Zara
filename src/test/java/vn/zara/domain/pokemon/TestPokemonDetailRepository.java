@@ -29,22 +29,22 @@ public class TestPokemonDetailRepository {
     protected static Logger Logger = LoggerFactory.getLogger(TestPokemonDetailRepository.class);
 
     @Autowired
-    private PokemonDetailRepository pokemons;
+    private PokemonRepository pokemons;
     @Autowired
-    private ResourceLoader resourceLoader;
+    private ResourceLoader    resourceLoader;
 
 
     @Test
     public void testFindAll() throws IOException {
-        List<PokemonDetail> pokes = pokemons.findAll();
+        List<Pokemon> pokes = pokemons.findAll();
         Assert.assertThat(pokes, CoreMatchers.anything());
     }
 
     @Test
     public void testFindOnePokemonDetailByName() {
-        Optional<PokemonDetail> pokemonDetail = pokemons.findOneByName("Ivysaur");
+        Optional<Pokemon> pokemonDetail = pokemons.findOneByName("Ivysaur");
         Assert.assertThat(pokemonDetail.get(), CoreMatchers.notNullValue());
-        Assert.assertThat(pokemonDetail.get().getId(), CoreMatchers.is("565f85255d7580838fd504e5"));
+        Assert.assertThat(pokemonDetail.get().getName(), CoreMatchers.is("Ivysaur"));
     }
 
 }

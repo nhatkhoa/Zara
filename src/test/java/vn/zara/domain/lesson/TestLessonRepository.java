@@ -7,10 +7,7 @@ package vn.zara.domain.lesson;
 
 import lombok.val;
 import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +33,11 @@ public class TestLessonRepository {
     @Autowired
     private QuestionRepository questions;
 
+    @Before
+    public void cleanDatabase() {
+        lessons.deleteAll();
+    }
+
     @Test
     public void testFindAll() {
         for (int i = 0; i < 3; i++) {
@@ -57,7 +59,7 @@ public class TestLessonRepository {
 
     @Test
     public void testAddExerciseToLesson() {
-        // --- create instance of Lesson
+        // --- create instance of LessonForListing
         val lesson = Utils.createLesson("Bài Học Test");
         lessons.save(lesson);
 
@@ -74,13 +76,6 @@ public class TestLessonRepository {
         Assert.assertThat(lessonResult.getExercises().size(), CoreMatchers.is(10));
         Assert.assertThat(lessonResult.getExercises().get(0).getTitle(), CoreMatchers.containsString("Bài tập dành cho gà con cấp"));
 
-    }
-
-
-    @Ignore
-    @After
-    public void cleanDatabase() {
-        lessons.deleteAll();
     }
 
 }
