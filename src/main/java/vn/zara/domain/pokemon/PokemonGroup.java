@@ -15,7 +15,7 @@ import vn.zara.domain.common.AbstractCollection;
 import java.util.HashMap;
 import java.util.Map;
 
-@Document
+@Document(collection = "pokemon_groups")
 @Data
 public class PokemonGroup extends AbstractCollection {
     protected static Logger Logger = LoggerFactory.getLogger(PokemonGroup.class);

@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import vn.zara.domain.common.AbstractCollection;
 
-@Document(collection = "pokemondetails")
+@Document(collection = "pokemons")
 @Data
 @ToString
 public class Pokemon extends AbstractCollection{

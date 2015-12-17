@@ -28,6 +28,7 @@ public class XAuthTokenFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
+
         try {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             String authToken = httpServletRequest.getHeader(XAUTH_TOKEN_HEADER_NAME);

@@ -33,6 +33,9 @@ public class TestPokemonDetailRepository {
     @Autowired
     private ResourceLoader    resourceLoader;
 
+    @Autowired
+    private PokemonInitializeDatabase pokemonInitializeDatabase;
+
 
     @Test
     public void testFindAll() throws IOException {
@@ -45,6 +48,11 @@ public class TestPokemonDetailRepository {
         Optional<Pokemon> pokemonDetail = pokemons.findOneByName("Ivysaur");
         Assert.assertThat(pokemonDetail.get(), CoreMatchers.notNullValue());
         Assert.assertThat(pokemonDetail.get().getName(), CoreMatchers.is("Ivysaur"));
+    }
+
+    @Test
+    public void initPokemon(){
+        pokemonInitializeDatabase.seedData();
     }
 
 }
