@@ -5,6 +5,7 @@
 
 package vn.zara.infras.dao;
 
+import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,13 @@ import vn.zara.domain.learn.DoExerciseService;
 import vn.zara.domain.lesson.Exercise;
 import vn.zara.domain.lesson.ExerciseRepository;
 import vn.zara.domain.lesson.Question;
+import vn.zara.domain.lesson.QuestionService;
 import vn.zara.web.dto.LessonDetail;
+import vn.zara.web.dto.QuestionResponse;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProcessDoExerciseService {
@@ -25,14 +30,17 @@ public class ProcessDoExerciseService {
     private final DoExerciseService     doExerciseService;
     private final DataForDisplayService dataForDisplayService;
     private final ExerciseRepository    exerciseRepository;
+    private final QuestionService questionService;
 
     @Autowired
     public ProcessDoExerciseService(DoExerciseService doExerciseService,
                                     DataForDisplayService dataForDisplayService,
-                                    ExerciseRepository exerciseRepository) {
+                                    ExerciseRepository exerciseRepository,
+                                    QuestionService questionService) {
         this.doExerciseService = doExerciseService;
         this.dataForDisplayService = dataForDisplayService;
         this.exerciseRepository = exerciseRepository;
+        this.questionService = questionService;
     }
 
     public LessonDetail updateExerciseScore(String lessonId, String exerciseId, int score) {
@@ -42,7 +50,7 @@ public class ProcessDoExerciseService {
         return dataForDisplayService.getLessonDetail(lessonId);
     }
 
-    public List<Question> getRandomQuestions(String exerciseId) {
+    public List<QuestionResponse> getRandomQuestions(String exerciseId) {
         Exercise exercise = exerciseRepository.findOne(exerciseId);
 
         if(exercise == null){
@@ -51,6 +59,13 @@ public class ProcessDoExerciseService {
             throw new ExerciseNotExisted(message);
         }
 
-        return null;
+        val listQuestion =  questionService.getRandomQuestionForExercise(exerciseId);
+        listQuestion.stream().forEach(p -> Logger.debug(String.format("Item %s", p.getQuestion())));
+
+        return listQuestion.stream().map(q -> {
+            QuestionResponse temp = (QuestionResponse) q;
+            temp.setScore(q.getLevel().getScore());
+            return  temp;
+        }).collect(Collectors.toList());
     }
 }

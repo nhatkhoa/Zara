@@ -54,14 +54,47 @@ public class LessonDataInitialize {
     public  List<Question> createRandomQuestions() {
         List<Question> quests = new ArrayList();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             val question = new Question();
-            question.setQuestion("Bạn có biết bảng nhân 3 là gì không?");
+            question.setQuestion(String.format("Cau %s: Bạn có biết bảng nhân 3 là gì không (Level BASIC) ?",i));
+            question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
+            question.setAnswers(new Integer[]{0});
+            question.setLevel(Question.LEVEL.BASIC);
+            quests.add(question);
+        }
+        for (int i = 0; i < 20; i++) {
+            val question = new Question();
+            question.setQuestion(String.format("Cau %s: Bạn có biết bảng nhân 3 là gì không (Level NORMAL) ?",i));
             question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
             question.setAnswers(new Integer[]{0});
             question.setLevel(Question.LEVEL.NORMAL);
             quests.add(question);
         }
+        for (int i = 0; i < 20; i++) {
+            val question = new Question();
+            question.setQuestion(String.format("Cau %s: Bạn có biết bảng nhân 3 là gì không (Level MEDIUM) ?",i));
+            question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
+            question.setAnswers(new Integer[]{0});
+            question.setLevel(Question.LEVEL.MEDIUM);
+            quests.add(question);
+        }
+        for (int i = 0; i < 20; i++) {
+            val question = new Question();
+            question.setQuestion(String.format("Cau %s: Bạn có biết bảng nhân 3 là gì không (Level HIGH) ?",i));
+            question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
+            question.setAnswers(new Integer[]{0});
+            question.setLevel(Question.LEVEL.HIGH);
+            quests.add(question);
+        }
+        for (int i = 0; i < 20; i++) {
+            val question = new Question();
+            question.setQuestion(String.format("Cau %s: Bạn có biết bảng nhân 3 là gì không (Level ADVANCED) ?",i));
+            question.setOptions(new String[]{"Là bảng nhân", "Là bảng cửu chương", "Không biết nữa"});
+            question.setAnswers(new Integer[]{0});
+            question.setLevel(Question.LEVEL.ADVANCED);
+            quests.add(question);
+        }
+
         questionRepository.save(quests);
         return quests;
     }

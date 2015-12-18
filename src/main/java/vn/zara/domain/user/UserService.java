@@ -39,5 +39,4 @@ public class UserService {
         String username = SecurityUtil.getCurrentLogin();
         return userRepository.findOneByUsername(username).orElse(null);
     }
-
 }

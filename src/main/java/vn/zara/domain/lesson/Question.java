@@ -19,9 +19,9 @@ public class Question extends AbstractCollection {
     public enum LEVEL {
         BASIC(10),
         NORMAL(20),
-        MEDIUM(30),
-        HIGH(40),
-        ADVANCED(50);
+        MEDIUM(40),
+        HIGH(80),
+        ADVANCED(160);
 
         private int score;
 
@@ -39,8 +39,8 @@ public class Question extends AbstractCollection {
 
     }
 
-    private String question;
-    private String[] options;
-    private Object[] answers;
+    private String question;    //anh tri dep trai khong?
+    private String[] options;   //l. dep trai 2. rat dep trai
+    private Object[] answers;   //2. rat dep trai
     private LEVEL level;
 }

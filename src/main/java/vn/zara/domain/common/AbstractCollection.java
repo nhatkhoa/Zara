@@ -5,6 +5,7 @@
 
 package vn.zara.domain.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
@@ -22,11 +23,13 @@ public class AbstractCollection {
     @CreatedDate
     @Getter
     @Setter
+    @JsonIgnore
     protected DateTime createdDate;
 
     @LastModifiedDate
     @Getter
     @Setter
+    @JsonIgnore
     protected DateTime lastModifiedDate;
 
 }
