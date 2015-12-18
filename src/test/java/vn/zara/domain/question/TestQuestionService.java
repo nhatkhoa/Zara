@@ -11,8 +11,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import vn.zara.ZaraApiApplication;
 import vn.zara.domain.lesson.Question;
 import vn.zara.domain.lesson.QuestionService;
+import vn.zara.web.dto.QuestionResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Vo on 17-Dec-15.

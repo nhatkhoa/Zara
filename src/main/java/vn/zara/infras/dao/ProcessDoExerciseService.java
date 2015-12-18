@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 public class ProcessDoExerciseService {
     protected static Logger Logger = LoggerFactory.getLogger(ProcessDoExerciseService.class);
 
-    private final DoExerciseService     doExerciseService;
+    private final DoExerciseService doExerciseService;
     private final DataForDisplayService dataForDisplayService;
-    private final ExerciseRepository    exerciseRepository;
+    private final ExerciseRepository exerciseRepository;
     private final QuestionService questionService;
 
     @Autowired
@@ -45,27 +45,25 @@ public class ProcessDoExerciseService {
 
     public LessonDetail updateExerciseScore(String lessonId, String exerciseId, int score) {
         Logger.debug(String.format("Request update score for exercise %s with score is %s",
-                                   exerciseId, score));
+                exerciseId, score));
         doExerciseService.addNewResultOfExercise(lessonId, exerciseId, score);
         return dataForDisplayService.getLessonDetail(lessonId);
     }
 
-    public List<QuestionResponse> getRandomQuestions(String exerciseId) {
+    public List<Question> getRandomQuestions(String exerciseId) {
         Exercise exercise = exerciseRepository.findOne(exerciseId);
 
-        if(exercise == null){
+        if (exercise == null) {
             String message = String.format("Exercise %s is not existed.", exerciseId);
             Logger.debug(message);
             throw new ExerciseNotExisted(message);
         }
 
-        val listQuestion =  questionService.getRandomQuestionForExercise(exerciseId);
+        val listQuestion = questionService.getRandomQuestionForExercise(exerciseId);
         listQuestion.stream().forEach(p -> Logger.debug(String.format("Item %s", p.getQuestion())));
 
         return listQuestion.stream().map(q -> {
-            QuestionResponse temp = (QuestionResponse) q;
-            temp.setScore(q.getLevel().getScore());
-            return  temp;
+            return new QuestionResponse().castQuestionToQuestionResponse(q);
         }).collect(Collectors.toList());
     }
 }

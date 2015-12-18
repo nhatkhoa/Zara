@@ -13,6 +13,7 @@ import vn.zara.domain.learn.DoExerciseRepository;
 import vn.zara.domain.lesson.Question;
 import vn.zara.infras.dao.ProcessDoExerciseService;
 import vn.zara.web.dto.LessonDetail;
+import vn.zara.web.dto.QuestionResponse;
 
 import java.util.List;
 import java.util.Set;
