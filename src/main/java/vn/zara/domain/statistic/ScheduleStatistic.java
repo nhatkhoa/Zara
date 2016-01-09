@@ -1,4 +1,4 @@
-package vn.zara.domain.Schedule;
+package vn.zara.domain.statistic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

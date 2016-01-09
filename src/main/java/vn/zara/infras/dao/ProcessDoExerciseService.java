@@ -59,11 +59,10 @@ public class ProcessDoExerciseService {
             throw new ExerciseNotExisted(message);
         }
 
-        val listQuestion = questionService.getRandomQuestionForExercise(exerciseId);
-        listQuestion.stream().forEach(p -> Logger.debug(String.format("Item %s", p.getQuestion())));
+        val listQuestion = doExerciseService.getRandomQuestions(exerciseId);
 
-        return listQuestion.stream().map(q -> {
-            return new QuestionResponse().castQuestionToQuestionResponse(q);
-        }).collect(Collectors.toList());
+        listQuestion.stream().forEach(p -> Logger.debug(String.format("Question %s", p.getQuestion())));
+
+        return listQuestion;
     }
 }

@@ -9,24 +9,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import vn.zara.domain.learn.DoExerciseRepository;
 import vn.zara.domain.lesson.Question;
 import vn.zara.infras.dao.ProcessDoExerciseService;
 import vn.zara.web.dto.LessonDetail;
-import vn.zara.web.dto.QuestionResponse;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/do-exercise")
-public class DoExerciseRest {
-    protected static Logger Logger = LoggerFactory.getLogger(DoExerciseRest.class);
+public class ExerciseRest {
+    protected static Logger Logger = LoggerFactory.getLogger(ExerciseRest.class);
 
     private final ProcessDoExerciseService processDoExerciseService;
 
     @Autowired
-    public DoExerciseRest(ProcessDoExerciseService processDoExerciseService) {
+    public ExerciseRest(ProcessDoExerciseService processDoExerciseService) {
         this.processDoExerciseService = processDoExerciseService;
     }
 

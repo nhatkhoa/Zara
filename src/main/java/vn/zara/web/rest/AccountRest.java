@@ -1,4 +1,4 @@
-// Copyright (c) 2015 KMS Technology, Inc.
+
 package vn.zara.web.rest;
 
 import org.slf4j.Logger;
@@ -20,6 +20,7 @@ import vn.zara.domain.util.SecurityUtil;
 import vn.zara.infras.security.xauth.Token;
 import vn.zara.infras.security.xauth.TokenProvider;
 import vn.zara.web.dto.RegisterUserInfo;
+import vn.zara.web.dto.UserDetail;
 
 import javax.validation.Valid;
 
@@ -52,12 +53,13 @@ public class AccountRest {
     @RequestMapping(value = "/register", method = POST)
     public void registerAccount(@Valid @RequestBody(required = true) RegisterUserInfo user) {
         logger.debug(user.toString());
-        userService.registerUser(user.getUsername(), user.getPassword());
+        userService.registerUser(user.getUsername(), user.getPassword(), user.isBoy());
     }
 
     @RequestMapping(value = "/login", method = POST)
     public Token login(@RequestParam String username,
                        @RequestParam String password) {
+        logger.debug(String.format("Login: %s - %s", username, password));
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 username, password);
         Authentication authentication = authenticationManager
@@ -79,7 +81,7 @@ public class AccountRest {
     }
 
     @RequestMapping(value = "/account", method = GET)
-    public User getAccount() {
+    public UserDetail getAccount() {
         return userService.getUserInfo();
     }
 

@@ -32,6 +32,8 @@ public class User extends AbstractCollection {
     @Indexed
     private String username;
 
+    private boolean boy;
+
     @JsonIgnore
     private String password;
 

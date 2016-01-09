@@ -14,14 +14,13 @@ import javax.validation.constraints.Size;
 
 @Data
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
-public class LessonForListing {
+@NoArgsConstructor
+public class UserDetail {
 
-    protected String id;
-    protected String title;
-    protected String description;
-    protected boolean canLearn;
-    protected long scoreRequire;
-    protected PokemonDetail pokemon;
+    private String username;
+    private boolean gender;
+    private long numberOfPokemon;
+    private long score;
+
 }

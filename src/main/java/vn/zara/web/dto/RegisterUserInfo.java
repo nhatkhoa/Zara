@@ -15,17 +15,19 @@ import javax.validation.constraints.Size;
 @ToString
 public class RegisterUserInfo {
 
-    @Pattern(regexp = "^[a-zA-Z0-9_]*$", message = "{validation.username.character}")
+    @Pattern(regexp = "^[a-zA-Z0-9_]*$", message = "Username must be not contains sensitive characters")
     @NotEmpty
-    @Size(min = 6, max = 50, message = "{validation.username.size}")
+    @Size(min = 6, max = 50, message = "The length of username must be between 6 and 50")
     private String username;
 
     @NotEmpty
-    @Size(min = 6, max = 50, message = "{validation.password.size}")
+    @Size(min = 6, max = 50, message = "The length of password must be between 6 and 50")
     private String password;
 
     @NotEmpty
     private String confirmPassword;
+
+    private boolean boy;
 
 
 }

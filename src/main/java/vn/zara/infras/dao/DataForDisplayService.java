@@ -19,12 +19,13 @@ import vn.zara.domain.lesson.Exercise;
 import vn.zara.domain.lesson.Lesson;
 import vn.zara.domain.lesson.LessonDataInitialize;
 import vn.zara.domain.lesson.LessonRepository;
-import vn.zara.domain.pokemon.Pokemon;
+import vn.zara.domain.pokemon.PokemonGroup;
 import vn.zara.domain.pokemon.PokemonService;
 import vn.zara.domain.util.SecurityUtil;
 import vn.zara.web.dto.ExerciseForListing;
 import vn.zara.web.dto.LessonDetail;
 import vn.zara.web.dto.LessonForListing;
+import vn.zara.web.dto.PokemonDetail;
 
 import java.util.Comparator;
 import java.util.List;
@@ -36,9 +37,9 @@ import java.util.stream.Collectors;
 public class DataForDisplayService {
     protected static Logger Logger = LoggerFactory.getLogger(DataForDisplayService.class);
 
-    private final LessonResultService  lessonResultService;
-    private final PokemonService       pokemonService;
-    private final LessonRepository     lessons;
+    private final LessonResultService lessonResultService;
+    private final PokemonService pokemonService;
+    private final LessonRepository lessons;
     private final LessonDataInitialize lessonDataInitialize;
     private final DoExerciseRepository doExerciseRepository;
 
@@ -55,23 +56,6 @@ public class DataForDisplayService {
         this.doExerciseRepository = doExerciseRepository;
     }
 
-    private String getNamePokemon(String lessonId) {
-        try {
-            return lessonResultService.getPokemonByLesson(lessonId).getName();
-        } catch (LessonResultNotExisted e) {
-            return "none";
-        }
-    }
-
-    private String getImgPokemon(String lessonId) {
-        try {
-            return lessonResultService.getPokemonByLesson(lessonId).getThumbnailImage();
-        } catch (LessonResultNotExisted e) {
-            return "none";
-        }
-    }
-
-
     public Set<LessonForListing> getAllLessonForIndex() {
         List<Lesson> lessonsOrigin = lessons.findAll();
 
@@ -81,19 +65,9 @@ public class DataForDisplayService {
             lessonDataInitialize.seedData();
         }
 
-        val comparetor = new Comparator<LessonForListing>() {
-            @Override
-            public int compare(LessonForListing o1, LessonForListing o2) {
-                Logger.debug(String.format("Compare lesson : %s[%s] with %s[%s]",
-                                           o1.getTitle(), o1.getPokemonLevel(), o2.getTitle(), o2.getPokemonLevel()));
-                return new Long(o1.getPokemonLevel() - o2.getPokemonLevel()).intValue();
-            }
-        };
-
         Set<LessonForListing> lessonForListings = lessonsOrigin
                 .stream()
-                .map(lesson -> getLessonForListingFromLesson(lesson))
-                .sorted(comparetor)
+                .map(lesson -> castLessonToLessonForListing(lesson))
                 .collect(Collectors.toSet());
 
         Logger.debug(String.format("Get all lesson for user %s, result: %s", SecurityUtil.getCurrentLogin(), lessonForListings.size()));
@@ -101,16 +75,18 @@ public class DataForDisplayService {
         return lessonForListings;
     }
 
-    private LessonForListing getLessonForListingFromLesson(Lesson lesson) {
+    private LessonForListing castLessonToLessonForListing(Lesson lesson) {
+        long scoreOfLesson = lessonResultService.getLessonScore(lesson.getId());
         return new LessonForListing(lesson.getId(),
-                                    lesson.getName(),
-                                    lesson.getDescription(),
-                                    getNamePokemon(lesson.getId()),
-                                    lessonResultService.getLessonScore(lesson.getId()).longValue(),
-                                    getImgPokemon(lesson.getId()));
+                lesson.getName(),
+                lesson.getDescription(),
+                lesson.getLevelRequire() <= scoreOfLesson,
+                scoreOfLesson,
+                lessonResultService.getPokemonForLesson(lesson.getId()));
     }
 
-    public LessonDetail getLessonDetail(String lessonId) {
+
+    public LessonDetail getLessonDetail(String lessonId) throws LessonResultNotExisted{
         String username = SecurityUtil.getCurrentLogin();
 
         Logger.debug(String.format("Request lesson detail for lesson %s on user %s", lessonId, username));
@@ -120,12 +96,11 @@ public class DataForDisplayService {
             Logger.debug(message);
             throw new LessonNotExisted(message);
         }
-        LessonForListing lessonForListing = getLessonForListingFromLesson(lesson);
-        LessonDetail lessonDetail = castToLessonDetail(lessonForListing);
 
-        Logger.debug(String.format("Port LessonForListing: %s to LessonDetail: %s", lessonForListing, lessonDetail));
+        long sumOfScore = lessonResultService.getLessonScore(lesson.getId());
+        PokemonDetail pokemonDetail = lessonResultService.getPokemonForLesson(lesson.getId());
 
-        lessonDetail.setTheory(lesson.getTheory());
+        Logger.debug(String.format("Get pokemon for lesson %s : %s", lesson.getName(), pokemonDetail != null ? pokemonDetail.getName() : "None"));
 
         // --- Get exercises for this lesson.
         List<ExerciseForListing> exerciseForListings = lesson
@@ -134,42 +109,30 @@ public class DataForDisplayService {
                 .map(exercise -> portToExerciseListing(exercise, lessonId, username))
                 .collect(Collectors.toList());
 
-        Logger.debug(String.format("Get %s exercises for lesson %s with user %s", exerciseForListings.size(), lessonId, username));
+        Logger.debug(String.format("Get %s exercises for lesson %s with user %s",
+                exerciseForListings.size(), lessonId, username));
 
-        lessonDetail.setExercises(exerciseForListings);
+        LessonDetail lessonDetail = new LessonDetail(lessonId,lesson.getName(),
+                lesson.getDescription(), lesson.getTheory(),pokemonDetail,exerciseForListings, sumOfScore);
 
         return lessonDetail;
-    }
-
-    private LessonDetail castToLessonDetail(LessonForListing lessonForListing) {
-        return new LessonDetail(lessonForListing.getId(),
-                                lessonForListing.getTitle(),
-                                lessonForListing.getDescription(),
-                                lessonForListing.getPokemon(),
-                                lessonForListing.getPokemonLevel(),
-                                lessonForListing.getPokemonImg());
-
     }
 
     private ExerciseForListing portToExerciseListing(Exercise exercise, String lessonId, String username) {
         Optional<DoExercise> lastDoExercise = getLastExerciseResult(exercise, lessonId, username);
 
         return new ExerciseForListing(exercise.getId(),
-                                      exercise.getTitle(),
-                                      exercise.getDescription(),
-                                      lastDoExercise.isPresent() ? lastDoExercise.get().getScore() : null,
-                                      lastDoExercise.isPresent() ? lastDoExercise.get().getCreatedDate() : null);
+                exercise.getTitle(),
+                exercise.getDescription(),
+                lastDoExercise.isPresent() ? lastDoExercise.get().getScore() : 0,
+                lastDoExercise.isPresent() ? lastDoExercise.get().getCreatedDate() : null);
     }
 
     private Optional<DoExercise> getLastExerciseResult(Exercise exercise, String lessonId, String username) {
         return doExerciseRepository
-                .findByUsernameAndLesson(username, lessonId)
-                .sorted().sorted().findFirst();
+                .findByUsernameAndLesson(username, lessonId).findFirst();
     }
 
-    private Pokemon getPokemonDetailForLesson() {
-        return null;
-    }
 
 
 }

@@ -8,8 +8,9 @@ package vn.zara.domain.learn;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public interface LessonResultRepository extends MongoRepository<LessonResult, String> {
     Optional<LessonResult> findOneByLessonIdAndUsername(String lessonId, String username);
-
+    Stream<LessonResult> findByUsername(String username);
 }

@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.RequestMethod;
 import vn.zara.infras.security.Http401UnauthorizedEntryPoint;
 import vn.zara.infras.security.xauth.TokenProvider;
 import vn.zara.infras.security.xauth.XAuthTokenConfigurer;
@@ -85,7 +86,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("**").permitAll()
+                .antMatchers("/api/register").permitAll()
+                .antMatchers("/api/activate").permitAll()
+                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/**").authenticated()
                 .and()
                 .apply(securityConfigurerAdapter());
 

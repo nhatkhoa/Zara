@@ -12,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.zara.domain.common.exception.ExerciseNotExisted;
 import vn.zara.domain.common.exception.LessonNotExisted;
 import vn.zara.domain.common.exception.ZaraException;
-import vn.zara.domain.lesson.LessonRepository;
+import vn.zara.domain.lesson.*;
 import vn.zara.domain.util.SecurityUtil;
 
-import java.util.EventObject;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,13 +31,16 @@ public class DoExerciseService {
     private final DoExerciseRepository doExerciseRepository;
     private final LessonResultService lessonResultService;
     private final LessonRepository lessonRepository;
+    private final ExerciseRepository exerciseRepository;
     @Autowired
     public DoExerciseService(DoExerciseRepository doExerciseRepository,
                              LessonResultService lessonResultService,
-                             LessonRepository lessonRepository){
+                             LessonRepository lessonRepository,
+                             ExerciseRepository exerciseRepository){
         this.doExerciseRepository = doExerciseRepository;
         this.lessonResultService = lessonResultService;
         this.lessonRepository = lessonRepository;
+        this.exerciseRepository = exerciseRepository;
     }
 
     @Transactional
@@ -58,6 +65,37 @@ public class DoExerciseService {
 
         // --- Update sum score of this lesson
         lessonResultService.updateLessonScore(lessonId);
+    }
+
+    public List<Question> getRandomQuestions(String exerciseId){
+        Exercise exercise = exerciseRepository.findOne(exerciseId);
+        if(exercise == null)
+            throw new ExerciseNotExisted("Can not get random question for not existed exercise!");
+
+        String username = "anonymousUser";
+
+        int sumScore = doExerciseRepository
+                .findByUsernameAndExercise(username, exerciseId)
+                .mapToInt(doExercise -> doExercise.getScore())
+                .parallel().sum();
+
+        List<Question.LEVEL> levels = Question.LEVEL.BASIC.getList(sumScore);
+
+        List<Question> questions = exercise.getQuestions()
+                .stream().filter(question -> levels.contains(question.getLevel()))
+                .collect(Collectors.toList());
+
+        Collections.shuffle(questions);
+
+        List<Question> random10Questions = questions.stream().limit(10).collect(Collectors.toList());
+
+        random10Questions.forEach(p->Logger.debug(String.format("Question %s - level %s"
+                                                    , p.getQuestion(), p.getLevel().name())));
+
+        Logger.debug(String.format("Found %s questions for levelScore %s", questions.size(), sumScore ));
+
+        return random10Questions;
+
     }
 
 }

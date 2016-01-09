@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import vn.zara.domain.learn.DoExercise;
 import vn.zara.domain.learn.DoExerciseService;
 import vn.zara.domain.lesson.Lesson;
 import vn.zara.domain.lesson.LessonRepository;
@@ -18,23 +17,22 @@ import vn.zara.infras.dao.DataForDisplayService;
 import vn.zara.web.dto.LessonDetail;
 import vn.zara.web.dto.LessonForListing;
 
-import java.util.List;
 import java.util.Set;
 
 
 @RestController
 @RequestMapping("/api")
-public class DisplayRest {
-    protected static Logger Logger = LoggerFactory.getLogger(DisplayRest.class);
+public class LessonRest {
+    protected static Logger Logger = LoggerFactory.getLogger(LessonRest.class);
 
     private final DataForDisplayService dataForDisplayService;
     private final DoExerciseService doExerciseService;
     private final LessonRepository lessonRepository;
 
     @Autowired
-    public DisplayRest(DataForDisplayService dataForDisplayService,
-                       DoExerciseService doExerciseService,
-                       LessonRepository lessonRepository) {
+    public LessonRest(DataForDisplayService dataForDisplayService,
+                      DoExerciseService doExerciseService,
+                      LessonRepository lessonRepository) {
         this.dataForDisplayService = dataForDisplayService;
         this.doExerciseService = doExerciseService;
         this.lessonRepository = lessonRepository;
@@ -48,8 +46,8 @@ public class DisplayRest {
     }
 
     @RequestMapping(value = "/lessons/{id}", method = RequestMethod.GET)
-    public Lesson getLesson(@PathVariable("id") String lessonId){
-        return lessonRepository.findOne(lessonId);
+    public LessonDetail getLesson(@PathVariable("id") String lessonId){
+        return dataForDisplayService.getLessonDetail(lessonId);
 
     }
 

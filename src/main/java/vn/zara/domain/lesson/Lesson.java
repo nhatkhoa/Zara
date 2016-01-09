@@ -23,6 +23,7 @@ public class Lesson extends AbstractCollection {
     private String name;
     private String description;
     private String theory;
+    private long levelRequire = 0;
 
     @DBRef
     private List<Exercise> exercises = new ArrayList();

@@ -3,22 +3,22 @@ package vn.zara.web.dto;
 
 
 import lombok.*;
+import vn.zara.domain.pokemon.Pokemon;
 
 import java.util.List;
 
 @Data
 @ToString
-public class LessonDetail extends LessonForListing{
+@AllArgsConstructor
+@NoArgsConstructor
+public class LessonDetail{
 
-    public LessonDetail(String id, String title, String description, String pokemon, long pokemonLevel, String pokemonImg) {
-        super(id, title, description, pokemon, pokemonLevel, pokemonImg);
-        this.setExercises(exercises);
-        this.setTheory(theory);
-    }
+    protected String id;
+    protected String title;
+    protected String description;
+    protected String theory;
+    protected PokemonDetail pokemon;
+    protected List<ExerciseForListing> exercises;
+    protected long sumOfScore;
 
-    @Getter @Setter
-    private String theory;
-
-    @Getter @Setter
-    private List<ExerciseForListing> exercises;
 }

@@ -14,11 +14,13 @@ import vn.zara.domain.common.exception.LessonResultNotExisted;
 import vn.zara.domain.common.exception.NotEnoughPokemon;
 import vn.zara.domain.common.exception.PokemonNotExisted;
 import vn.zara.domain.common.exception.ZaraException;
+import vn.zara.domain.lesson.Exercise;
 import vn.zara.domain.pokemon.Pokemon;
 import vn.zara.domain.pokemon.PokemonGroup;
 import vn.zara.domain.pokemon.PokemonGroupRepository;
 import vn.zara.domain.pokemon.PokemonInitializeDatabase;
 import vn.zara.domain.util.SecurityUtil;
+import vn.zara.web.dto.PokemonDetail;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -89,7 +91,7 @@ public class LessonResultService {
                 .collect(Collectors.toList());
 
         List<PokemonGroup> availablePokemon = pokemonGroupRepository.findAll();
-        availablePokemon.removeAll(existedPokemon);
+        existedPokemon.forEach(pokemonGroup -> availablePokemon.remove(pokemonGroup));
         Logger.debug(String.format("Get pokemon random for %s, number of available pokemon is %s",
                                    username, availablePokemon.size()));
         int totalPokemon = availablePokemon.size();
@@ -116,7 +118,7 @@ public class LessonResultService {
         return lessonResult.isPresent() ? lessonResult.get().getScore() : 0;
     }
 
-    public Pokemon getPokemonByLesson(String lessonId) {
+    public Pokemon getPokemonByLesson(String lessonId) throws LessonResultNotExisted{
         String username = SecurityUtil.getCurrentLogin();
 
         Logger.debug(String.format("Get pokemon for lesson %s at user %s", lessonId, username));
@@ -148,5 +150,67 @@ public class LessonResultService {
 
         return resultPokemon;
     }
+
+    public long getSumScoreOfCurrentUser(){
+        String username = SecurityUtil.getCurrentLogin();
+        return lessonResultRepository.findByUsername(username)
+                .mapToLong(lessonResult -> lessonResult.getScore())
+                .sum();
+    }
+
+    public PokemonGroup getGroupPokemon(String lessonId){
+        String username = SecurityUtil.getCurrentLogin();
+
+        Logger.debug(String.format("Get pokemon for lesson %s at user %s", lessonId, username));
+        Optional<LessonResult> lessonResult = lessonResultRepository.findOneByLessonIdAndUsername(lessonId, username);
+        if(!lessonResult.isPresent()){
+            Logger.debug(String.format("User %s still not learning lesson %s", username, lessonId));
+            throw new LessonResultNotExisted(String.format("User %s still not learning lesson %s", username, lessonId));
+        }
+
+        return lessonResult.get().getPokemon();
+
+    }
+
+    public PokemonDetail getPokemonForLesson(String lessonId){
+       try{
+           Pokemon pokemon = getPokemonByLesson(lessonId);
+           long scoreOfLesson = getLessonScore(lessonId);
+           PokemonGroup pokemonGroup = getGroupPokemon(lessonId);
+           long[] scores = pokemonGroup.getPokemons()
+                   .keySet()
+                   .stream()
+                   .mapToLong(score -> score.longValue())
+                   .toArray();
+           long currentScore = 0;
+           long nextScore = 0;
+           long previousScore = 0;
+           int level = 0;
+           for (int i = 0; i < scores.length; i++){
+               if(scoreOfLesson >= scores[i] && scoreOfLesson < scores[i + 1]){
+                   currentScore = scoreOfLesson - scores[i];
+                   nextScore = scores[i+1];
+                   previousScore = scores[i];
+                   level = i + 1;
+               }
+
+               if(scoreOfLesson >= scores[i] && i == scores.length - 1){
+                   currentScore = scoreOfLesson - scores[i];
+                   previousScore = scores[i];
+                   nextScore = currentScore + previousScore;
+                   level = i + 1;
+               }
+           }
+           PokemonDetail detail = new PokemonDetail(pokemon.getName(),pokemon.getHeight(),
+                   pokemon.getThumbnailAltText(),pokemon.getThumbnailImage(),pokemon.getType(),
+                   pokemon.getAbilities(),pokemon.getWeakness(), level, nextScore, currentScore, previousScore);
+
+           return detail;
+       }catch(Exception e){
+           Logger.error(e.getMessage());
+           return null;
+       }
+    }
+
 
 }
