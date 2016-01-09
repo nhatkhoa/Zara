@@ -12,10 +12,11 @@
 # Cài đặt
 1. Clone project về.
 2. Import as maven nếu dùng eclipse
-3. Start mongodb server.
-3. Vào Resource/Application.yaml để config database
-4. Dùng terminal: mvn spring-boot:run để chạy web.
-5. Truy cập vào http://localhost:8080/swagger-ui.html để test những api đã release.
+3. Start mongodb server
+4. Import dữ liệu backup trong thư mục ./zara
+5. Vào Resource/Application.yaml để config database
+6. Dùng terminal: mvn spring-boot:run để chạy web.
+7. Truy cập vào http://localhost:8080/swagger-ui.html để test những api đã release.
 
 # Mô tả
 
