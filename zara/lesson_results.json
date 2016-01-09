@@ -1,0 +1,10 @@
+{ 
+    "_id" : ObjectId("568e7922cba44a09527bd00a"), 
+    "_class" : "vn.zara.domain.learn.LessonResult", 
+    "lessonId" : "568e7109cba4d343aca7318c", 
+    "username" : "nhatkhoa", 
+    "score" : NumberLong(410), 
+    "createdDate" : ISODate("2016-01-07T14:41:38.141+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:40:43.420+0000"), 
+    "pokemon" : DBRef("pokemon_groups", ObjectId("5674a29b890cbff560201e0c"))
+}

@@ -1,0 +1,40 @@
+{ 
+    "_id" : ObjectId("5688f2a90f96d1610c8ed450"), 
+    "_class" : "vn.zara.domain.user.User", 
+    "username" : "khoa", 
+    "boy" : true, 
+    "password" : "$2a$10$moQYTd.3QRHF/1vK7yiFDO7Xe0R1giLxR8hR2X1r/R3GWIml8sRxy", 
+    "role" : "USER", 
+    "createdDate" : ISODate("2016-01-03T10:06:32.872+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-03T10:06:32.872+0000")
+}
+{ 
+    "_id" : ObjectId("5688f3910f96d1610c8ed451"), 
+    "_class" : "vn.zara.domain.user.User", 
+    "username" : "khoahoang", 
+    "boy" : true, 
+    "password" : "$2a$10$5IfP8J1xC834e0wFWM.exe8QXVUCvQvUelGdKmAeE4LZIXjJs8F0S", 
+    "role" : "USER", 
+    "createdDate" : ISODate("2016-01-03T10:10:25.560+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-03T10:10:25.560+0000")
+}
+{ 
+    "_id" : ObjectId("568dea174f9218a5399a1cfd"), 
+    "_class" : "vn.zara.domain.user.User", 
+    "username" : "kewoqkrwq", 
+    "boy" : true, 
+    "password" : "$2a$10$Tisld0ic/iRY.9msd22Lc.nWyZz1RxXSfDGHH4I2G.85e7ibas5H2", 
+    "role" : "USER", 
+    "createdDate" : ISODate("2016-01-07T04:31:19.548+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T04:31:19.548+0000")
+}
+{ 
+    "_id" : ObjectId("568e70c8cba4d343aca7318b"), 
+    "_class" : "vn.zara.domain.user.User", 
+    "username" : "nhatkhoa", 
+    "boy" : false, 
+    "password" : "$2a$10$2Zj/pg9KEZsZSrfIWstKDuesVLBwLDWRzNZosc39jbbwmlVhiTYu6", 
+    "role" : "USER", 
+    "createdDate" : ISODate("2016-01-07T14:06:00.299+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:06:00.299+0000")
+}

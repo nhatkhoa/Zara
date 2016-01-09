@@ -1,0 +1,87 @@
+{ 
+    "_id" : ObjectId("568e7109cba4d343aca7318c"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Bảng Nhân 3", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:05.768+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.180+0000"), 
+    "exercises" : [
+        DBRef("exercises", ObjectId("568e710acba4d343aca7318d")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca7318e")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca7318f")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73190")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73191")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73192")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73193")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73194")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73195")), 
+        DBRef("exercises", ObjectId("568e710acba4d343aca73196"))
+    ]
+}
+{ 
+    "_id" : ObjectId("568e710bcba4d343aca733ef"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Bảng Nhân 4", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:07.182+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.182+0000"), 
+    "exercises" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("568e710bcba4d343aca733f0"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Đọc thời gian", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:07.183+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.183+0000"), 
+    "exercises" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("568e710bcba4d343aca733f1"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Phép nhân 3 chữ số", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:07.185+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.185+0000"), 
+    "exercises" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("568e710bcba4d343aca733f2"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Phép chia 2 chữ số", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:07.186+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.186+0000"), 
+    "exercises" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("568e710bcba4d343aca733f3"), 
+    "_class" : "vn.zara.domain.lesson.Lesson", 
+    "name" : "Bài học: Phép công 3 chữ số", 
+    "description" : "Bài học mẫu", 
+    "theory" : "Đây được nhấn mạnh chỉ là mang tính chất minh họa chứ không có làm được gì cả.", 
+    "levelRequire" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T14:07:07.187+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:07:07.187+0000"), 
+    "exercises" : [
+
+    ]
+}

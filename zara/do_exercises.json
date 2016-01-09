@@ -1,0 +1,90 @@
+{ 
+    "_id" : ObjectId("568e7922cba44a09527bd009"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(80), 
+    "createdDate" : ISODate("2016-01-07T14:41:38.013+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:41:38.013+0000")
+}
+{ 
+    "_id" : ObjectId("568e7966cba44a09527bd00b"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(80), 
+    "createdDate" : ISODate("2016-01-07T14:42:46.358+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T14:42:46.358+0000")
+}
+{ 
+    "_id" : ObjectId("568f8bbb3d287f0aab0e5b39"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(50), 
+    "createdDate" : ISODate("2016-01-08T10:13:15.687+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:13:15.687+0000")
+}
+{ 
+    "_id" : ObjectId("568f8eef3d28c375995d64c7"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(70), 
+    "createdDate" : ISODate("2016-01-08T10:26:55.912+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:26:55.912+0000")
+}
+{ 
+    "_id" : ObjectId("568f8fa73d28c375995d64c8"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-08T10:29:59.873+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:29:59.873+0000")
+}
+{ 
+    "_id" : ObjectId("568f8fad3d28c375995d64c9"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-08T10:30:05.848+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:30:05.848+0000")
+}
+{ 
+    "_id" : ObjectId("568f8fb93d28c375995d64ca"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(20), 
+    "createdDate" : ISODate("2016-01-08T10:30:17.683+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:30:17.683+0000")
+}
+{ 
+    "_id" : ObjectId("568f919b3d28c3bc12f35e7d"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318f", 
+    "score" : NumberInt(20), 
+    "createdDate" : ISODate("2016-01-08T10:38:19.930+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:38:19.930+0000")
+}
+{ 
+    "_id" : ObjectId("568f922b3d28c3bc12f35e7e"), 
+    "_class" : "vn.zara.domain.learn.DoExercise", 
+    "username" : "nhatkhoa", 
+    "lesson" : "568e7109cba4d343aca7318c", 
+    "exercise" : "568e710acba4d343aca7318d", 
+    "score" : NumberInt(90), 
+    "createdDate" : ISODate("2016-01-08T10:40:43.414+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-08T10:40:43.414+0000")
+}

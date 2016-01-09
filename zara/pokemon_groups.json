@@ -1,0 +1,33 @@
+{ 
+    "_id" : ObjectId("5674a29b890cbff560201e0c"), 
+    "_class" : "vn.zara.domain.pokemon.PokemonGroup", 
+    "createdDate" : ISODate("2015-12-19T00:19:39.928+0000"), 
+    "lastModifiedDate" : ISODate("2015-12-19T00:19:39.928+0000"), 
+    "pokemons" : {
+        "0" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc9a")), 
+        "2000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc99")), 
+        "1000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc98"))
+    }
+}
+{ 
+    "_id" : ObjectId("5674a29c890cbff560201e0d"), 
+    "_class" : "vn.zara.domain.pokemon.PokemonGroup", 
+    "createdDate" : ISODate("2015-12-19T00:19:40.132+0000"), 
+    "lastModifiedDate" : ISODate("2015-12-19T00:19:40.132+0000"), 
+    "pokemons" : {
+        "0" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc9a")), 
+        "2000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc99")), 
+        "1000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc98"))
+    }
+}
+{ 
+    "_id" : ObjectId("5674a29c890cbff560201e0e"), 
+    "_class" : "vn.zara.domain.pokemon.PokemonGroup", 
+    "createdDate" : ISODate("2015-12-19T00:19:40.138+0000"), 
+    "lastModifiedDate" : ISODate("2015-12-19T00:19:40.138+0000"), 
+    "pokemons" : {
+        "0" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc9a")), 
+        "2000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc99")), 
+        "1000" : DBRef("pokemons", ObjectId("56749ffa7116a3238dd1fc98"))
+    }
+}

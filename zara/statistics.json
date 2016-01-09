@@ -1,0 +1,40 @@
+{ 
+    "_id" : ObjectId("568e8b80cba4da38b2534d98"), 
+    "_class" : "vn.zara.domain.statistic.Statistic", 
+    "username" : "khoa", 
+    "lesson" : NumberInt(0), 
+    "exercise" : NumberInt(0), 
+    "score" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T16:00:00.186+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T16:00:00.186+0000")
+}
+{ 
+    "_id" : ObjectId("568e8b80cba4da38b2534d99"), 
+    "_class" : "vn.zara.domain.statistic.Statistic", 
+    "username" : "khoahoang", 
+    "lesson" : NumberInt(0), 
+    "exercise" : NumberInt(0), 
+    "score" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T16:00:00.252+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T16:00:00.252+0000")
+}
+{ 
+    "_id" : ObjectId("568e8b80cba4da38b2534d9a"), 
+    "_class" : "vn.zara.domain.statistic.Statistic", 
+    "username" : "kewoqkrwq", 
+    "lesson" : NumberInt(0), 
+    "exercise" : NumberInt(0), 
+    "score" : NumberInt(0), 
+    "createdDate" : ISODate("2016-01-07T16:00:00.272+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T16:00:00.272+0000")
+}
+{ 
+    "_id" : ObjectId("568e8b80cba4da38b2534d9b"), 
+    "_class" : "vn.zara.domain.statistic.Statistic", 
+    "username" : "nhatkhoa", 
+    "lesson" : NumberInt(1), 
+    "exercise" : NumberInt(2), 
+    "score" : NumberInt(160), 
+    "createdDate" : ISODate("2016-01-07T16:00:00.282+0000"), 
+    "lastModifiedDate" : ISODate("2016-01-07T16:00:00.282+0000")
+}
