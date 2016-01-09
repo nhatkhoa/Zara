@@ -6,13 +6,13 @@
 
 # Yêu cầu 
 1. Mongodb
-2. Mysql (tạm thời, đang nghiên cứu để bỏ hẳn mysql)
 3. Maven path (maven ở biến môi trường)
-4. Sài eclipse or Intellji idea
+4. Sử dụng eclipse or Intellji idea
 
 # Cài đặt
 1. Clone project về.
 2. Import as maven nếu dùng eclipse
+3. Start mongodb server.
 3. Vào Resource/Application.yaml để config database
 4. Dùng terminal: mvn spring-boot:run để chạy web.
 5. Truy cập vào http://localhost:8080/swagger-ui.html để test những api đã release.
