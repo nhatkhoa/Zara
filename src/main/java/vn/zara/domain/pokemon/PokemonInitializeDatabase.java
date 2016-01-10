@@ -25,21 +25,21 @@ public class PokemonInitializeDatabase {
 
     public void seedData(){
         Map<Long, String> testMap = new HashMap<>();
-        testMap.put(new Long(0),"Venusaur");
-        testMap.put(new Long(1000),"Bulbasaur");
-        testMap.put(new Long(2000),"Ivysaur");
+        testMap.put(new Long(0),"Bulbasaur");
+        testMap.put(new Long(1000),"Ivysaur");
+        testMap.put(new Long(2000),"Venusaur");
         pokemonService.createGroupPokemon(testMap);
 
         Map<Long, String> testMap1 = new HashMap<>();
         testMap1.put(new Long(0),"Charmander");
         testMap1.put(new Long(1500),"Charmeleon");
         testMap1.put(new Long(3000),"Charizard");
-        pokemonService.createGroupPokemon(testMap);
+        pokemonService.createGroupPokemon(testMap1);
 
         Map<Long, String> testMap2 = new HashMap<>();
         testMap2.put(new Long(0),"Oddish");
         testMap2.put(new Long(1000),"Gloom");
         testMap2.put(new Long(2000),"Vileplume");
-        pokemonService.createGroupPokemon(testMap);
+        pokemonService.createGroupPokemon(testMap2);
     }
 }

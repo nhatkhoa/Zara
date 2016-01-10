@@ -8,6 +8,7 @@ package vn.zara.domain.learn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PropertyComparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.zara.domain.common.exception.LessonResultNotExisted;
@@ -118,7 +119,8 @@ public class LessonResultService {
         return lessonResult.isPresent() ? lessonResult.get().getScore() : 0;
     }
 
-    public Pokemon getPokemonByLesson(String lessonId) throws LessonResultNotExisted{
+    public Pokemon getPokemonByLesson(String lessonId) throws LessonResultNotExisted
+    {
         String username = SecurityUtil.getCurrentLogin();
 
         Logger.debug(String.format("Get pokemon for lesson %s at user %s", lessonId, username));
@@ -127,30 +129,35 @@ public class LessonResultService {
             Logger.debug(String.format("User %s still not learning lesson %s", username, lessonId));
             throw new LessonResultNotExisted(String.format("User %s still not learning lesson %s", username, lessonId));
         }
+        long scoreOfLesson = lessonResult.get().getScore();
 
-        Pokemon resultPokemon = null;
-        resultPokemon = lessonResult
+        Logger.debug(String.format("+ getPokemonByLesson: score lesson is %s", scoreOfLesson));
+
+        Logger.debug(String.format("+ getPokemonByLesson: number level of pokemon %s",
+                lessonResult.get().getPokemon().getPokemons().size()));
+
+        Optional<Long> keyScore = lessonResult
                 .get()
                 .getPokemon()
                 .getPokemons()
-                .entrySet()
+                .keySet()
                 .stream()
-                .filter(pokemonEntry -> (lessonResult.get().getScore() - pokemonEntry.getKey().longValue()) >= 0)
-                .max(new Comparator<Map.Entry<Long, Pokemon>>() {
-                    @Override
-                    public int compare(Map.Entry<Long, Pokemon> o1, Map.Entry<Long, Pokemon> o2) {
-                        return o1.getKey().intValue() - o2.getKey().intValue();
-                    }
-                })
-                .get()
-                .getValue();
+                .filter(pokemonScore -> pokemonScore <= scoreOfLesson)
+                .max(((o1, o2) -> o1.intValue() - o2.intValue()));
 
+        if(!keyScore.isPresent()){
+            Logger.debug(String.format("User %s get pokemon for lesson %s with level %s | Find out %s",
+                    username, lessonId, lessonResult.get().getScore(),
+                    lessonResult.get().getPokemon().getPokemons().get(new Long(0))));
+            return lessonResult.get().getPokemon().getPokemons().get(new Long(0));
+        }
+        Logger.debug("getPokemonForLesson: key score is " + keyScore.get());
         Logger.debug(String.format("User %s get pokemon for lesson %s with level %s | Find out %s",
-                                   username, lessonId, lessonResult.get().getScore(), resultPokemon));
+                username, lessonId, lessonResult.get().getScore(),
+                lessonResult.get().getPokemon().getPokemons().get(new Long(keyScore.get()))));
 
-        return resultPokemon;
+        return lessonResult.get().getPokemon().getPokemons().get(new Long(keyScore.get()));
     }
-
     public long getSumScoreOfCurrentUser(){
         String username = SecurityUtil.getCurrentLogin();
         return lessonResultRepository.findByUsername(username)
@@ -175,18 +182,29 @@ public class LessonResultService {
     public PokemonDetail getPokemonForLesson(String lessonId){
        try{
            Pokemon pokemon = getPokemonByLesson(lessonId);
+           Logger.debug(String.format("+ getPokemonForLesson: got pokemon %s", pokemon));
            long scoreOfLesson = getLessonScore(lessonId);
            PokemonGroup pokemonGroup = getGroupPokemon(lessonId);
            long[] scores = pokemonGroup.getPokemons()
                    .keySet()
                    .stream()
                    .mapToLong(score -> score.longValue())
+                   .sorted()
                    .toArray();
            long currentScore = 0;
            long nextScore = 0;
            long previousScore = 0;
            int level = 0;
            for (int i = 0; i < scores.length; i++){
+               Logger.debug(String.format("Item of list pokemon level: %s", scores[i]));
+               if(scoreOfLesson >= scores[i] && i == scores.length - 1){
+                   currentScore = scoreOfLesson - scores[i];
+                   previousScore = scores[i];
+                   nextScore = currentScore + previousScore;
+                   level = i + 1;
+                   continue;
+               }
+
                if(scoreOfLesson >= scores[i] && scoreOfLesson < scores[i + 1]){
                    currentScore = scoreOfLesson - scores[i];
                    nextScore = scores[i+1];
@@ -194,17 +212,11 @@ public class LessonResultService {
                    level = i + 1;
                }
 
-               if(scoreOfLesson >= scores[i] && i == scores.length - 1){
-                   currentScore = scoreOfLesson - scores[i];
-                   previousScore = scores[i];
-                   nextScore = currentScore + previousScore;
-                   level = i + 1;
-               }
            }
            PokemonDetail detail = new PokemonDetail(pokemon.getName(),pokemon.getHeight(),
                    pokemon.getThumbnailAltText(),pokemon.getThumbnailImage(),pokemon.getType(),
                    pokemon.getAbilities(),pokemon.getWeakness(), level, nextScore, currentScore, previousScore);
-
+           Logger.debug(detail.toString());
            return detail;
        }catch(Exception e){
            Logger.error(e.getMessage());

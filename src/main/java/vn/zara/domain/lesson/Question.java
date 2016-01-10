@@ -39,7 +39,7 @@ public class Question extends AbstractCollection {
             return this.score;
         }
 
-        public List<LEVEL> getList(int score){
+        public static List<LEVEL> getList(int score){
             List<LEVEL> temp = new ArrayList<>();
             for (LEVEL level : LEVEL.values()){
                 if(level.getScore() <= score){

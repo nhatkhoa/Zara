@@ -81,7 +81,7 @@ public class DataForDisplayService {
                 lesson.getName(),
                 lesson.getDescription(),
                 lesson.getLevelRequire() <= scoreOfLesson,
-                scoreOfLesson,
+                lesson.getLevelRequire() <= scoreOfLesson ? lesson.getLevelRequire() - scoreOfLesson : 0,
                 lessonResultService.getPokemonForLesson(lesson.getId()));
     }
 
@@ -100,7 +100,8 @@ public class DataForDisplayService {
         long sumOfScore = lessonResultService.getLessonScore(lesson.getId());
         PokemonDetail pokemonDetail = lessonResultService.getPokemonForLesson(lesson.getId());
 
-        Logger.debug(String.format("Get pokemon for lesson %s : %s", lesson.getName(), pokemonDetail != null ? pokemonDetail.getName() : "None"));
+        Logger.debug(String.format("Get pokemon for lesson %s : %s",
+                lesson.getName(), pokemonDetail != null ? pokemonDetail.getName() : "None"));
 
         // --- Get exercises for this lesson.
         List<ExerciseForListing> exerciseForListings = lesson

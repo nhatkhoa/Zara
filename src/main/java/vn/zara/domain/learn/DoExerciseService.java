@@ -72,14 +72,21 @@ public class DoExerciseService {
         if(exercise == null)
             throw new ExerciseNotExisted("Can not get random question for not existed exercise!");
 
-        String username = "anonymousUser";
+        String username = SecurityUtil.getCurrentLogin();
 
-        int sumScore = doExerciseRepository
+        Logger.debug(String.format("Number do exercise %s - %s",
+                exercise.getTitle(), doExerciseRepository.findByUsernameAndExercise(username, exerciseId).count()));
+
+        long sumScore = doExerciseRepository
                 .findByUsernameAndExercise(username, exerciseId)
-                .mapToInt(doExercise -> doExercise.getScore())
-                .parallel().sum();
+                .mapToLong(doExercise -> doExercise.getScore())
+                .sum();
 
-        List<Question.LEVEL> levels = Question.LEVEL.BASIC.getList(sumScore);
+        Logger.debug(String.format("Sum score of exercise %s: %s", exercise.getTitle(), sumScore));
+
+        List<Question.LEVEL> levels = Question.LEVEL.getList((int)sumScore);
+        Logger.debug("- List of range level for random question:");
+        levels.forEach(level -> Logger.debug(String.format("Level %s : score is %s", level.name(), level.getScore())));
 
         List<Question> questions = exercise.getQuestions()
                 .stream().filter(question -> levels.contains(question.getLevel()))
@@ -88,11 +95,6 @@ public class DoExerciseService {
         Collections.shuffle(questions);
 
         List<Question> random10Questions = questions.stream().limit(10).collect(Collectors.toList());
-
-        random10Questions.forEach(p->Logger.debug(String.format("Question %s - level %s"
-                                                    , p.getQuestion(), p.getLevel().name())));
-
-        Logger.debug(String.format("Found %s questions for levelScore %s", questions.size(), sumScore ));
 
         return random10Questions;
 

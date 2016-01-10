@@ -23,6 +23,7 @@ public class DoExercise extends AbstractCollection {
     @Indexed
     private String lesson;
 
+    @Indexed
     private String exercise;
 
     private int score;
